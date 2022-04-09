@@ -1,0 +1,81 @@
+[
+  {
+    "username": "huy",
+    "todoList": [
+      {
+        "id": "todoList1",
+        "name": "Todo 1",
+        "taskList": [
+          {
+            "id": "todoList1_Task1",
+            "content": "Task 1",
+            "checked": "true"
+          },
+          {
+            "id": "todoList1_Task2",
+            "content": "Task 2",
+            "checked": "false"
+          }
+        ]
+      },
+      {
+        "id": "todoList2",
+        "name": "Todo 2",
+        "taskList": [
+          {
+            "id": "todoList2_Task1",
+            "content": "Task 1",
+            "checked": "false"
+          },
+          {
+            "id": "todoList2_Task2",
+            "content": "Task 2",
+            "checked": "true"
+          },
+          {
+            "id": "todoList2_Task3",
+            "content": "Task 3",
+            "checked": "false"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "username": "huy1",
+    "todoList": [
+      {
+        "id": "todoList1",
+        "name": "todo 1",
+        "taskList": [
+          {
+            "id": "todoList1_Task1",
+            "content": "task 1",
+            "checked": "false"
+          },
+          {
+            "id": "todoList1_Task2",
+            "content": "task 2",
+            "checked": "false"
+          }
+        ]
+      },
+      {
+        "id": "todoList2",
+        "name": "todo 2",
+        "taskList": [
+          {
+            "id": "todoList2_Task1",
+            "content": "task 1",
+            "checked": "false"
+          },
+          {
+            "id": "todoList2_Task2",
+            "content": "task 2",
+            "checked": "true"
+          }
+        ]
+      }
+    ]
+  }
+]
