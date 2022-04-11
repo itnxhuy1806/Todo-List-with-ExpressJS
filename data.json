@@ -51,11 +51,11 @@
           {
             "id": "todoList1_Task1",
             "content": "task 1",
-            "checked": "false"
+            "checked": "true"
           },
           {
             "id": "todoList1_Task2",
-            "content": "task 2",
+            "content": "task2",
             "checked": "false"
           }
         ]

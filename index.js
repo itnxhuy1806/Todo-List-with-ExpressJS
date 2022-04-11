@@ -5,13 +5,13 @@ let fs = require('fs')
 let path = require('path')
 let _ = require('lodash')
 let engines = require('consolidate')
-
+let cookieParser = require('cookie-parser')
 let bodyParser = require('body-parser')
 
 app.engine('hbs', engines.handlebars)
 app.set('views', './views')
 app.set('view engine', 'hbs')
-
+app.use(cookieParser());
 app.use('/js', express.static('js'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -37,10 +37,7 @@ function saveFile(fp, data) {
      // fs.unlinkSync(fp) // delete the file
      fs.writeFileSync(fp, JSON.stringify(data, null, 2), { encoding: 'utf8' })
 }
-app.get('/', function (req, res) {
-     let data = getData('./data.json')
-     res.render('index', { data: data })
-})
+
 app.get('/login', function (req, res) {
      res.render('loginPage')
 })
@@ -48,7 +45,7 @@ app.put('/login', function (req, res) {
      let fp = './dataAcc.json'
      let data = getData(fp)
      let acc = req.body
-     if(checkLogin(data, acc))
+     if (checkLogin(data, acc))
           res.end()
 })
 app.get('/signUp', function (req, res) {
@@ -96,8 +93,8 @@ app.put('/removeTask', function (req, res) {
      let fp = './data.json'
      let data = getData(fp)
      let task = req.body.data
-     let oldTaskList = data.filter(val => val.username == req.body.username)[0].todoList.filter(val => val.id = task.idTodo)[0].taskList
-     data.filter(val => val.username == req.body.username)[0].todoList.filter(val => val.id = task.idTodo)[0]
+     let oldTaskList = data.filter(val => val.username == req.body.username)[0].todoList.filter(val => val.id == task.idTodo)[0].taskList
+     data.filter(val => val.username == req.body.username)[0].todoList.filter(val => val.id == task.idTodo)[0]
           .taskList = oldTaskList.filter(val => val.id != task.cTask.id)
      saveFile(fp, data)
      res.end()
@@ -114,13 +111,27 @@ app.put('/changeTask', function (req, res) {
      saveFile(fp, data)
      res.end()
 })
-
-
-
-app.get("/getData", function (req, res) {
+app.get("/getData/:idTodo", function (req, res) {
      let data = getData('./data.json')
+     data = data.filter(e => e.username === req.cookies.username)[0]
+     data = data.todoList.filter(e => e.id == req.params.idTodo)
      res.send(data)
 })
+app.get('/', function (req, res) {
+     let data = getData('./data.json')
+     res.render('index', { data: data.filter(e => e.username === req.cookies.username)[0] })
+
+})
+
+app.get('/todoList/:idTodo', function (req, res) {
+     let data = getData('./data.json')
+     data = data.filter(e => e.username === req.cookies.username)[0]
+     data = data.todoList.filter(e => e.id == req.params.idTodo)
+     console.log(data)
+     res.render('todo', { data: data[0].id })
+})
+
+
 let server = app.listen(3000, function () {
      console.log('Server running at http://localhost:' + server.address().port)
 })

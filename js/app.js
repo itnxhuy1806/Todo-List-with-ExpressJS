@@ -54,7 +54,7 @@ function createTask(todoList, cTodoList, data) {
           checked = data.checked
      }
      let check = ""
-     if (checked=='true') {
+     if (checked == 'true') {
           check = "checked"
      }
      let task = `<input class="form-check-input" ${check} type="checkbox">`
@@ -141,10 +141,10 @@ function addEventCreateTask(todoList, cTodoList) {
      })
 }
 function loadTodoList() {
-     $.get("/getData", {}, function (data) {
-          let curDataTodoList = data
-          if (curDataTodoList.filter((val) => val.username == username).length > 0) {
-               curDataTodoList.filter((val) => val.username == username)[0].todoList.map(function (val) {
+     let id = $("#idTodo").text()
+     $.get("/getData/" + id, {}, function (data) {
+          if (data.length > 0) {
+               data.map(function (val) {
                     let { todoList, cTodoList } = createToDoList(val)
                     addEventCreateTask(todoList, cTodoList)
                     $("#TodoLists").append(todoList)
